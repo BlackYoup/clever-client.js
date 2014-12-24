@@ -33,11 +33,6 @@ var methods = {
       "style": "query"
     }]
   }],
-  "/addons/providers": [{
-    "verb": "GET",
-    "name": "getAddonProviders",
-    "params": []
-  }],
   "/admin/owners/{id}/applications/{appId}": [{
     "verb": "DELETE",
     "name": "deleteApplicationForOwner",
@@ -1573,6 +1568,11 @@ var methods = {
   "/ping/stats": [{
     "verb": "GET",
     "name": "stats",
+    "params": []
+  }],
+  "/products/addonproviders": [{
+    "verb": "GET",
+    "name": "getAddonProviders",
     "params": []
   }],
   "/products/instances": [{
