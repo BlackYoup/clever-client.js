@@ -63,6 +63,15 @@ module.exports = function(grunt) {
           "dist/clever-client.min.js": "dist/clever-client.js"
         }
       }
+    },
+    watch: {
+      tests: {
+        files: 'tests/**/*.js',
+        tasks: ['test'],
+        options: {
+          atBegin: true
+        }
+      }
     }
   });
 
@@ -73,6 +82,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-express-server");
   grunt.loadNpmTasks("grunt-jasmine-node");
+  grunt.loadNpmTasks("grunt-contrib-watch");
 
   grunt.registerTask("wadl2json", "Fetch Clever-Cloud API description", function() {
     var done = this.async();
