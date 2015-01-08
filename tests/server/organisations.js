@@ -5,6 +5,7 @@ var _ = require("lodash");
 var router = module.exports = express.Router();
 
 var organisations = require("./data/organisations.js");
+var consumptions = require("./data/consumptions.js");
 
 router.use(bodyParser.json());
 
@@ -14,8 +15,15 @@ router.param("orgaId", function(req, res, next, orgaId) {
   var orga = organisations[orgaId];
 
   if(orga) {
-    req.orga = orga;
-    next();
+    var member = _.filter(orga.members, function(member){
+      return member.member.id === req.userId;
+    });
+    if(member){
+      req.orga = orga;
+      next();
+    } else{
+      res.status(401).json({type: "error", message: "You cannot access the organisations " + orga.id + " with user " + req.userId});
+    }
   }
   else {
     res.status(404).json({type: "error", message: "Organisation not found"});
@@ -40,14 +48,15 @@ router.get("/organisations", function(req, res, next) {
 });
 
 router.get("/organisations/:orgaId", function(req, res, next) {
-  var member = _.find(req.orga.members, function(member) {
-    return member.member.id == req.userId;
-  });
+  res.json(req.orga);
+});
 
-  if(member) {
-    res.json(req.orga);
-  }
-  else {
-    res.status(401).json({type: "error", message: "You cannot access the organisation " + req.param.orgaId});
+
+router.get("/organisations/:orgaId/consumptions", function(req, res){
+  var orgaConsumptions = consumptions[req.orga.id];
+  if(req.query.appId){
+    res.json(orgaConsumptions[req.query.appId]);
+  } else{
+    res.json(orgaConsumptions);
   }
 });

@@ -5,6 +5,7 @@ module.exports = {
   "user_c27c26e4-bf7b-4835-8df7-6472dc25cfdb": {
     "id": "user_c27c26e4-bf7b-4835-8df7-6472dc25cfdb",
     "email": "michael@league.com",
+    "emails": ["michel.league@snarky-puppy.com"],
     "name": "Michael League",
     "phone": "0102030405",
     "address": "1, A Street",

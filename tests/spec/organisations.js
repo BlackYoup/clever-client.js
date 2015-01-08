@@ -28,5 +28,18 @@ module.exports = function(client) {
         console.error(JSON.stringify(error));
       });
     });
+
+    it("should be able to retrieve organisation members", function(done){
+      var req = client.organisations._.get().withParams([orgaId]).send();
+
+      req.onValue(function(orga){
+        expect(orga.members[0].member.id).toBe(userId);
+        done();
+      });
+
+      req.onError(function(error){
+        console.error(JSON.stringify(error));
+      });
+    });
   });
 };

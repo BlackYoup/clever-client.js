@@ -1,4 +1,4 @@
-module.exports = function(client) {
+module.exports = function(client, displayError) {
   var userId = "user_c27c26e4-bf7b-4835-8df7-6472dc25cfdb";
   var userAddonId = "postgresql_postgres_23b98d9d-4529-4711-8877-aadb9273636b";
 
@@ -14,9 +14,7 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
-      });
+      req.onError(displayError);
     });
 
     it("should be able to retrieve a user addon", function(done) {
@@ -27,9 +25,7 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
-      });
+      req.onError(displayError);
     });
 
     it("should be able to retrieve organisation addons", function(done) {
@@ -40,9 +36,7 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
-      });
+      req.onError(displayError);
     });
 
     it("should be able to retrieve an organisation addon", function(done) {
@@ -53,9 +47,28 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
+      req.onError(displayError);
+    });
+
+    it("should be able to retrieve tags of a user addon", function(done){
+      var req = client.self.addons._.tags.get().withParams([userAddonId]).send();
+
+      req.onValue(function(tags){
+        expect(tags[0]).toBe("ground-up");
+        done();
       });
+
+      req.onError(displayError);
+    });
+
+    it("should be able to retrieve tags of a organisation addon", function(done){
+      var req = client.organisations._.addons._.tags.get().withParams([orgaId, orgaAddonId]).send();
+
+      req.onValue(function(tags){
+        expect(tags[0]).toBe("ground-up");
+        done();
+      });
+      req.onError(displayError);
     });
   });
 };

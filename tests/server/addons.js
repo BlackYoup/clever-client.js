@@ -13,7 +13,8 @@ router.use([
   "/self/addons",
   "/self/addons/:addonId",
   "/organisations/:orgaId/addons",
-  "/organisations/:orgaId/addons/:addonId"
+  "/organisations/:orgaId/addons/:addonId",
+  "/organisations/:orgaId/addons/:addonId/tags"
   ], require("./authorization.js"));
 
 router.param("orgaId", function(req, res, next, orgaId) {
@@ -52,10 +53,18 @@ router.get("/self/addons/:addonId", function(req, res, next) {
   res.json(req.addon);
 });
 
+router.get("/self/addons/:addonId/tags", function(req, res, next){
+  res.json(req.addon.tags);
+});
+
 router.get("/organisations/:orgaId/addons", function(req, res, next) {
   res.json(req.orga.addons);
 });
 
 router.get("/organisations/:orgaId/addons/:addonId", function(req, res, next) {
   res.json(req.addon);
+});
+
+router.get("/organisations/:orgaId/addons/:addonId/tags", function(req, res, next){
+  res.json(req.addon.tags);
 });

@@ -1,4 +1,4 @@
-module.exports = function(client) {
+module.exports = function(client, displayError) {
   var userId = "user_c27c26e4-bf7b-4835-8df7-6472dc25cfdb";
   var userAppId = "app_da86bf81-bff2-4eaa-9f70-9adc660e1e4a";
 
@@ -14,9 +14,7 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
-      });
+      req.onError(displayError);
     });
 
     it("should be able to retrieve a user application", function(done) {
@@ -27,9 +25,18 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
+      req.onError(displayError);
+    });
+
+    it("should be able to retrieve vhosts of a user application", function(done){
+      var req = client.self.applications._.vhosts.get().withParams([userAppId]).send();
+
+      req.onValue(function(vhosts){
+        expect(vhosts[0].fqdn).toBe("thing-of-gold.cleverapps.io");
+        done();
       });
+
+      req.onError(displayError);
     });
 
     it("should be able to retrieve organisation applications", function(done) {
@@ -40,9 +47,7 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
-      });
+      req.onError(displayError);
     });
 
     it("should be able to retrieve an organisation application", function(done) {
@@ -53,8 +58,15 @@ module.exports = function(client) {
         done();
       });
 
-      req.onError(function(error) {
-        console.error(JSON.stringify(error));
+      req.onError(displayError);
+    });
+
+    it("should be able to retrieve vhosts of an application of organisation", function(done){
+      var req = client.organisations._.applications._.vhosts.get().withParams([orgaId, orgaAppId]).send();
+
+      req.onValue(function(vhosts){
+        expect(vhosts[0].fqdn).toBe("minjor.cleverapps.io");
+        done();
       });
     });
   });

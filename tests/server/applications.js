@@ -12,8 +12,10 @@ router.use(bodyParser.json());
 router.use([
   "/self/applications",
   "/self/applications/:appId",
+  "/self/applications/:appId/vhosts",
   "/organisations/:orgaId/applications",
-  "/organisations/:orgaId/applications/:appId"
+  "/organisations/:orgaId/applications/:appId",
+  "/organisations/:orgaId/applications/:appId/vhosts"
   ], require("./authorization.js"));
 
 router.param("orgaId", function(req, res, next, orgaId) {
@@ -52,10 +54,18 @@ router.get("/self/applications/:appId", function(req, res, next) {
   res.json(req.app);
 });
 
+router.get("/self/applications/:appId/vhosts", function(req, res, next){
+  res.json(req.app.vhosts);
+});
+
 router.get("/organisations/:orgaId/applications", function(req, res, next) {
   res.json(req.orga.apps);
 });
 
 router.get("/organisations/:orgaId/applications/:appId", function(req, res, next) {
   res.json(req.app);
+});
+
+router.get("/organisations/:orgaId/applications/:appId/vhosts", function(req, res, next){
+  res.json(req.app.vhosts);
 });
