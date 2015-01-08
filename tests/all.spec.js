@@ -16,16 +16,12 @@ var client = require("../dist/clever-client.js")({
   API_AUTHORIZATION: anonymousClient.session.getAuthorization(tokens)
 });
 
-var displayError = function(error){
-  console.error(JSON.stringify(error));
-};
-
-require("./spec/owner.js")(client, displayError);
-require("./spec/self.js")(client, displayError);
-require("./spec/organisations.js")(client, displayError);
-require("./spec/applications.js")(client, displayError);
-require("./spec/addons.js")(client, displayError);
-require("./spec/providers.js")(client, displayError);
-require("./spec/consumptions.js")(client, displayError);
+require("./spec/owner.js")(client);
+require("./spec/self.js")(client);
+require("./spec/organisations.js")(client);
+require("./spec/applications.js")(client);
+require("./spec/addons.js")(client);
+require("./spec/providers.js")(client);
+require("./spec/consumptions.js")(client);
 
 module.exports = {};

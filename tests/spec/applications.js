@@ -1,4 +1,6 @@
-module.exports = function(client, displayError) {
+var Bacon = require('baconjs');
+
+module.exports = function(client) {
   var userId = "user_c27c26e4-bf7b-4835-8df7-6472dc25cfdb";
   var userAppId = "app_da86bf81-bff2-4eaa-9f70-9adc660e1e4a";
 
@@ -9,64 +11,72 @@ module.exports = function(client, displayError) {
     it("should be able to retrieve user applications", function(done) {
       var req = client.self.applications.get().send();
 
-      req.onValue(function(apps) {
-        expect(apps[0].id).toBe(userAppId);
+      req.subscribe(function(event) {
+        expect(event.hasValue()).toBe(true)
+        expect(event.value()[0].id).toBe(userAppId);
         done();
-      });
 
-      req.onError(displayError);
+        return Bacon.noMore;
+      });
     });
 
     it("should be able to retrieve a user application", function(done) {
       var req = client.self.applications._.get().withParams([userAppId]).send();
 
-      req.onValue(function(app) {
-        expect(app.id).toBe(userAppId);
+      req.subscribe(function(event) {
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().id).toBe(userAppId);
         done();
-      });
 
-      req.onError(displayError);
+        return Bacon.noMore;
+      });
     });
 
     it("should be able to retrieve vhosts of a user application", function(done){
       var req = client.self.applications._.vhosts.get().withParams([userAppId]).send();
 
-      req.onValue(function(vhosts){
-        expect(vhosts[0].fqdn).toBe("thing-of-gold.cleverapps.io");
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()[0].fqdn).toBe("thing-of-gold.cleverapps.io");
         done();
-      });
 
-      req.onError(displayError);
+        return Bacon.noMore;
+      });
     });
 
     it("should be able to retrieve organisation applications", function(done) {
       var req = client.organisations._.applications.get().withParams([orgaId]).send();
 
-      req.onValue(function(apps) {
-        expect(apps[0].id).toBe(orgaAppId);
+      req.subscribe(function(event) {
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()[0].id).toBe(orgaAppId);
         done();
-      });
 
-      req.onError(displayError);
+        return Bacon.noMore;
+      });
     });
 
     it("should be able to retrieve an organisation application", function(done) {
       var req = client.organisations._.applications._.get().withParams([orgaId, orgaAppId]).send();
 
-      req.onValue(function(app) {
-        expect(app.id).toBe(orgaAppId);
+      req.subscribe(function(event) {
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().id).toBe(orgaAppId);
         done();
-      });
 
-      req.onError(displayError);
+        return Bacon.noMore;
+      });
     });
 
     it("should be able to retrieve vhosts of an application of organisation", function(done){
       var req = client.organisations._.applications._.vhosts.get().withParams([orgaId, orgaAppId]).send();
 
-      req.onValue(function(vhosts){
-        expect(vhosts[0].fqdn).toBe("minjor.cleverapps.io");
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()[0].fqdn).toBe("minjor.cleverapps.io");
         done();
+
+        return Bacon.noMore;
       });
     });
   });
