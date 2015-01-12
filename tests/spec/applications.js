@@ -12,7 +12,7 @@ module.exports = function(client) {
       var req = client.self.applications.get().send();
 
       req.subscribe(function(event) {
-        expect(event.hasValue()).toBe(true)
+        expect(event.hasValue()).toBe(true);
         expect(event.value()[0].id).toBe(userAppId);
         done();
 
@@ -38,6 +38,35 @@ module.exports = function(client) {
       req.subscribe(function(event){
         expect(event.hasValue()).toBe(true);
         expect(event.value()[0].fqdn).toBe("thing-of-gold.cleverapps.io");
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should be able to retrieve a user application deployments", function(done){
+      var req = client.self.applications._.deployments.get().withParams([userAppId]).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().length).toBe(3);
+        expect(event.value()[0].id).toBe(0);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should be able to retrieve a user application deployments with a limit of 1 and offset 1", function(done){
+      var req = client.self.applications._.deployments.get().withParams([userAppId]).withQuery({
+        offset: 2,
+        limit: 1
+      }).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().length).toBe(1);
+        expect(event.value()[0].id).toBe(2);
         done();
 
         return Bacon.noMore;
@@ -74,6 +103,35 @@ module.exports = function(client) {
       req.subscribe(function(event){
         expect(event.hasValue()).toBe(true);
         expect(event.value()[0].fqdn).toBe("minjor.cleverapps.io");
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should be able to retrieve an organisation application deployments", function(done){
+      var req = client.organisations._.applications._.deployments.get().withParams([orgaId, orgaAppId]).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().length).toBe(3);
+        expect(event.value()[0].id).toBe(0);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should be able to retrieve an organisation application deployments with a limit of 1 and offset 1", function(done){
+      var req = client.organisations._.applications._.deployments.get().withParams([orgaId, orgaAppId]).withQuery({
+        offset: 2,
+        limit: 1
+      }).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().length).toBe(1);
+        expect(event.value()[0].id).toBe(2);
         done();
 
         return Bacon.noMore;

@@ -6,6 +6,7 @@ var router = module.exports = express.Router();
 
 var users = require("./data/users.js");
 var organisations = require("./data/organisations.js");
+var deployments = require("./data/deployments.js");
 
 router.use(bodyParser.json());
 
@@ -58,6 +59,14 @@ router.get("/self/applications/:appId/vhosts", function(req, res, next){
   res.json(req.app.vhosts);
 });
 
+router.get("/self/applications/:appId/deployments", function(req, res, next){
+  if(req.query.offset && req.query.limit){
+    res.json(_.first(deployments[req.params.appId].slice(req.query.offset), parseInt(req.query.limit)));
+  } else{
+    res.json(deployments[req.params.appId]);
+  }
+});
+
 router.get("/organisations/:orgaId/applications", function(req, res, next) {
   res.json(req.orga.apps);
 });
@@ -68,4 +77,12 @@ router.get("/organisations/:orgaId/applications/:appId", function(req, res, next
 
 router.get("/organisations/:orgaId/applications/:appId/vhosts", function(req, res, next){
   res.json(req.app.vhosts);
+});
+
+router.get("/organisations/:orgaId/applications/:appId/deployments", function(req, res, next){
+  if(req.query.offset && req.query.limit){
+    res.json(_.first(deployments[req.params.appId].slice(req.query.offset), parseInt(req.query.limit)));
+  } else{
+    res.json(deployments[req.params.appId]);
+  }
 });

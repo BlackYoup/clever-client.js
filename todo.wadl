@@ -67,15 +67,6 @@
         </resource>
         <resource path="self/applications/{appId}/deployments">
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="appId" style="template" type="xs:string"/>
-            <method id="getApplication" name="GET">
-                <request>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:string"/>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offset" style="query" type="xs:string"/>
-                </request>
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
             <resource path="{deploymentId}/instances">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="appId" style="template" type="xs:string"/>
@@ -867,15 +858,6 @@
         <resource path="organisations/{id}/applications/{appId}/deployments">
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="appId" style="template" type="xs:string"/>
-            <method id="getApplicationDeploymentsForOrga" name="GET">
-                <request>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:string"/>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offset" style="query" type="xs:string"/>
-                </request>
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
             <resource path="{deploymentId}/instances">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="appId" style="template" type="xs:string"/>
