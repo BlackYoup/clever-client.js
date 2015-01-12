@@ -30,11 +30,11 @@ module.exports = function(client) {
     });
 
     it("should be able to retrieve organisation members", function(done){
-      var req = client.organisations._.get().withParams([orgaId]).send();
+      var req = client.organisations._.members.get().withParams([orgaId]).send();
 
       req.subscribe(function(event){
         expect(event.hasValue()).toBe(true);
-        expect(event.value().members[0].member.id).toBe(userId);
+        expect(event.value()[0].member.id).toBe(userId);
         done();
 
         return Bacon.noMore;

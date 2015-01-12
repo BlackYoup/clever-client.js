@@ -52,8 +52,7 @@ router.get("/organisations/:orgaId", function(req, res, next) {
   res.json(req.orga);
 });
 
-
-router.get("/organisations/:orgaId/consumptions", function(req, res){
+router.get("/organisations/:orgaId/consumptions", function(req, res, next){
   var orgaConsumptions = consumptions[req.orga.id];
   if(req.query.appId){
     res.json(orgaConsumptions[req.query.appId]);
@@ -62,6 +61,10 @@ router.get("/organisations/:orgaId/consumptions", function(req, res){
   }
 });
 
-router.get("/organisations/:orgaId/credits", function(req, res){
+router.get("/organisations/:orgaId/credits", function(req, res, next){
   res.json(credits[req.orga.id]);
+});
+
+router.get("/organisations/:orgaId/members", function(req, res, next){
+  res.json(req.orga.members);
 });
