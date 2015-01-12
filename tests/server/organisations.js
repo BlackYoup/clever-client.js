@@ -6,6 +6,7 @@ var router = module.exports = express.Router();
 
 var organisations = require("./data/organisations.js");
 var consumptions = require("./data/consumptions.js");
+var credits = require("./data/credits.js");
 
 router.use(bodyParser.json());
 
@@ -59,4 +60,8 @@ router.get("/organisations/:orgaId/consumptions", function(req, res){
   } else{
     res.json(orgaConsumptions);
   }
+});
+
+router.get("/organisations/:orgaId/credits", function(req, res){
+  res.json(credits[req.orga.id]);
 });

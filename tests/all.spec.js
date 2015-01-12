@@ -23,5 +23,6 @@ require("./spec/applications.js")(client);
 require("./spec/addons.js")(client);
 require("./spec/providers.js")(client);
 require("./spec/consumptions.js")(client);
+require("./spec/credits.js")(client);
 
 module.exports = {};

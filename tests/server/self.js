@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var _ = require("lodash");
 var consumptions = require("./data/consumptions.js");
+var credits = require("./data/credits.js");
 
 var router = module.exports = express.Router();
 var user = require("./data/users.js");
@@ -39,4 +40,8 @@ router.get("/self/consumptions", function(req, res){
   } else{
     res.json(userConsumptions);
   }
+});
+
+router.get("/self/credits", function(req, res){
+  res.json(credits[req.userId]);
 });
