@@ -74,5 +74,17 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
+
+    it("should be able to get a 404 for an organisation recurring payment", function(done){
+      var req = client.organisations._.payments.recurring.get().withParams([orgaId]).send();
+
+      req.subscribe(function(event){
+        expect(event.isError()).toBe(true);
+        expect(event.error.id).toBe(9029);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
   });
 };

@@ -10,6 +10,7 @@ app.use(require("./applications.js"));
 app.use(require("./addons.js"));
 app.use(require("./validation.js"));
 app.use(require("./forgottenPassword.js"));
+app.use(require("./payments.js"));
 
 app.listen(1234);
 console.log("test server listening on port 1234…");

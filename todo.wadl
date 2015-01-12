@@ -226,16 +226,6 @@
                 </method>
             </resource>
         </resource>
-        <resource path="cleverapps">
-            <resource path="{name}">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="name" style="template" type="xs:string"/>
-                <method id="checkDomainAvailability" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
         <resource path="organisations/{id}/applications/{appId}/tags">
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="appId" style="template" type="xs:string"/>
@@ -258,11 +248,6 @@
         <resource path="self/payments">
             <resource path="recurring">
                 <method id="deleteRecurrentPayment" name="DELETE">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-                <method id="getRecurrentPayment" name="GET">
                     <response>
                         <representation mediaType="application/json"/>
                     </response>
@@ -1240,12 +1225,6 @@
                         <representation mediaType="application/json"/>
                     </response>
                 </method>
-                <method id="getRecurrentPayment" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
             <resource path="billings">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
                 <method id="buyDrops" name="POST">
