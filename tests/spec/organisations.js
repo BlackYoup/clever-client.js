@@ -40,5 +40,39 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
+
+    it("should validate the VAT number", function(done){
+      var VAT = "88 888 888 888";
+      var country = "FR";
+      var req = client.vat_check.get().withQuery({
+        country: country,
+        vat: VAT.replace(/\s*/g, '')
+      }).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().valid).toBe(true);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should reject the VAT number", function(done){
+      var VAT = "88";
+      var country = "FRANCE";
+      var req = client.vat_check.get().withQuery({
+        country: country,
+        vat: VAT
+      }).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().valid).toBe(false);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
   });
 };

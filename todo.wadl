@@ -78,19 +78,6 @@
                 </method>
             </resource>
         </resource>
-        <resource path="validation/vat">
-            <resource path="{key}">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="key" style="template" type="xs:string"/>
-                <method id="validate" name="GET">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="action" style="query" type="xs:string"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
         <resource path="oauth">
             <resource path="access_token">
                 <method id="postAccessTokenRequest" name="POST">
