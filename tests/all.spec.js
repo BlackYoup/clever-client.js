@@ -21,7 +21,6 @@ require("./spec/self.js")(client);
 require("./spec/organisations.js")(client);
 require("./spec/applications.js")(client);
 require("./spec/addons.js")(client);
-require("./spec/providers.js")(client);
 require("./spec/consumptions.js")(client);
 require("./spec/credits.js")(client);
 

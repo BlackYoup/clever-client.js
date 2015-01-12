@@ -6,6 +6,7 @@ var router = module.exports = express.Router();
 
 var users = require("./data/users.js");
 var organisations = require("./data/organisations.js");
+var providers = require("./data/providers.js");
 
 router.use(bodyParser.json());
 
@@ -67,4 +68,8 @@ router.get("/organisations/:orgaId/addons/:addonId", function(req, res, next) {
 
 router.get("/organisations/:orgaId/addons/:addonId/tags", function(req, res, next){
   res.json(req.addon.tags);
+});
+
+router.get("/addons/providers", function(req, res, next){
+  res.json(providers);
 });

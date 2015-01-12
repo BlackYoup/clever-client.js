@@ -197,15 +197,6 @@
                 </method>
             </resource>
         </resource>
-        <resource path="addons">
-            <resource path="providers">
-                <method id="getAddonProviders" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
         <resource path="organisations/{id}/members">
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
             <method id="addOrganisationMember" name="POST">
