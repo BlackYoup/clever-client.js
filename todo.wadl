@@ -291,11 +291,6 @@
                         <representation mediaType="application/json"/>
                     </response>
                 </method>
-                <method id="getInvoice" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
             </resource>
             <resource path="methods/{mId}">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mId" style="template" type="xs:string"/>
@@ -1200,11 +1195,6 @@
                     </response>
                 </method>
                 <method id="deletePurchaseOrder" name="DELETE">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-                <method id="getInvoice" name="GET">
                     <response>
                         <representation mediaType="application/json"/>
                     </response>

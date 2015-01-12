@@ -7,6 +7,7 @@ var router = module.exports = express.Router();
 var organisations = require("./data/organisations.js");
 var consumptions = require("./data/consumptions.js");
 var credits = require("./data/credits.js");
+var billings = require('./data/billings.js');
 
 router.use(bodyParser.json());
 
@@ -67,4 +68,16 @@ router.get("/organisations/:orgaId/credits", function(req, res, next){
 
 router.get("/organisations/:orgaId/members", function(req, res, next){
   res.json(req.orga.members);
+});
+
+router.get("/organisations/:orgaId/payments/recurring", function(req, res, next){
+  res.status(400).json({
+    type: "error",
+    message: "This organisation does not have a recurrent payment registered",
+    id: 9029
+  });
+});
+
+router.get("/organisations/:orgaId/payments/billings", function(req, res, next){
+  res.json(billings[req.orga.id]);
 });

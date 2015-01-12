@@ -51,5 +51,17 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
+
+    it("should be able to get organisation invoices", function(done){
+      var req = client.self.payments.billings.get().send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().id).toBe(userId);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
   });
 };
