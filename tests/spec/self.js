@@ -27,5 +27,17 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
+
+    it("should be able to get reset_password form", function(done){
+      var req = client.password_forgotten.get().send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()).toBe("<form>password_forgotten</form>");
+        done();
+
+        return Bacon.noMore;
+      });
+    });
   });
 };
