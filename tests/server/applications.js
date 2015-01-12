@@ -67,6 +67,10 @@ router.get("/self/applications/:appId/deployments", function(req, res, next){
   }
 });
 
+router.get("/self/applications/:appId/tags", function(req, res, next){
+  res.json(req.app.tags);
+});
+
 router.get("/organisations/:orgaId/applications", function(req, res, next) {
   res.json(req.orga.apps);
 });
@@ -85,4 +89,8 @@ router.get("/organisations/:orgaId/applications/:appId/deployments", function(re
   } else{
     res.json(deployments[req.params.appId]);
   }
+});
+
+router.get("/organisations/:orgaId/applications/:appId/tags", function(req, res, next){
+  res.json(req.app.tags);
 });

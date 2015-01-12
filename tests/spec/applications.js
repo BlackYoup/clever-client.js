@@ -73,6 +73,18 @@ module.exports = function(client) {
       });
     });
 
+    it("should be able to retrieve a user application tags", function(done){
+      var req = client.self.applications._.tags.get().withParams([userAppId]).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()[0]).toBe("ground-up");
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
     it("should be able to retrieve organisation applications", function(done) {
       var req = client.organisations._.applications.get().withParams([orgaId]).send();
 
@@ -132,6 +144,18 @@ module.exports = function(client) {
         expect(event.hasValue()).toBe(true);
         expect(event.value().length).toBe(1);
         expect(event.value()[0].id).toBe(2);
+        done();
+
+        return Bacon.noMore;
+      });
+    });
+
+    it("should be able to retrieve an organisation application tags", function(done){
+      var req = client.organisations._.applications._.tags.get().withParams([orgaId, orgaAppId]).send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value()[0]).toBe("ground-up");
         done();
 
         return Bacon.noMore;
