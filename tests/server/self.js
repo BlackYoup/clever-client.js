@@ -58,3 +58,7 @@ router.get("/self/payments/recurring", function(req, res, next){
 router.get("/self/payments/billings", function(req, res, next){
   res.json(billings[req.userId]);
 });
+
+router.get("/self/payments/billings/:billingId", function(req, res, next){
+  res.json(billings[req.userId][req.params.billingId]);
+});

@@ -81,3 +81,7 @@ router.get("/organisations/:orgaId/payments/recurring", function(req, res, next)
 router.get("/organisations/:orgaId/payments/billings", function(req, res, next){
   res.json(billings[req.orga.id]);
 });
+
+router.get("/organisations/:orgaId/payments/billings/:billingId", function(req, res, next){
+  res.json(billings[req.orga.id][req.params.billingId]);
+});

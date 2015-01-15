@@ -270,11 +270,6 @@
                         <representation mediaType="application/json"/>
                     </response>
                 </method>
-                <method id="getInvoices" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
             </resource>
             <resource path="billings/{bid}">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="bid" style="template" type="xs:string"/>
@@ -411,11 +406,6 @@
             </resource>
         </resource>
         <resource path="self/applications">
-            <method id="getApplications" name="GET">
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
             <method id="addApplication" name="POST">
                 <request>
                     <representation mediaType="application/json"/>
@@ -546,28 +536,12 @@
                 </method>
             </resource>
         </resource>
-        <resource path="vat_check">
-            <method id="checkVat" name="GET">
-                <request>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="country" style="query" type="xs:string"/>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="vat" style="query" type="xs:string"/>
-                </request>
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
-        </resource>
         <resource path="organisations/{id}/applications">
             <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="template" type="xs:string"/>
             <method id="addApplication" name="POST">
                 <request>
                     <representation mediaType="application/json"/>
                 </request>
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
-            <method id="getAllApplications" name="GET">
                 <response>
                     <representation mediaType="application/json"/>
                 </response>
@@ -579,11 +553,6 @@
                     <request>
                         <representation mediaType="application/json"/>
                     </request>
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-                <method id="getApplication" name="GET">
                     <response>
                         <representation mediaType="application/json"/>
                     </response>
@@ -822,11 +791,6 @@
                 <request>
                     <representation mediaType="application/json"/>
                 </request>
-                <response>
-                    <representation mediaType="application/json"/>
-                </response>
-            </method>
-            <method id="getUser" name="GET">
                 <response>
                     <representation mediaType="application/json"/>
                 </response>
@@ -1221,11 +1185,6 @@
                     <request>
                         <representation mediaType="application/json"/>
                     </request>
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-                <method id="getInvoices" name="GET">
                     <response>
                         <representation mediaType="application/json"/>
                     </response>
