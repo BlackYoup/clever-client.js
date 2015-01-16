@@ -307,11 +307,6 @@
                 </method>
             </resource>
             <resource path="methods">
-                <method id="getUserPaymentMethods" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
                 <method id="addUserMethod" name="POST">
                     <request>
                         <representation mediaType="application/json"/>

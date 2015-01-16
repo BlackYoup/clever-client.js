@@ -7,6 +7,7 @@ var credits = require("./data/credits.js");
 var router = module.exports = express.Router();
 var user = require("./data/users.js");
 var billings = require('./data/billings.js');
+var methods = require('./data/methods.js');
 
 router.use(bodyParser.json());
 
@@ -61,4 +62,8 @@ router.get("/self/payments/billings", function(req, res, next){
 
 router.get("/self/payments/billings/:billingId", function(req, res, next){
   res.json(billings[req.userId][req.params.billingId]);
+});
+
+router.get("/self/payments/methods", function(req, res, next){
+  res.json(methods[req.userId]);
 });

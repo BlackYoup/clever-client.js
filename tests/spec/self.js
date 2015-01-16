@@ -79,5 +79,18 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
+
+    it("should be able to get User payment methods", function(done){
+      var req = client.self.payments.methods.get().send();
+
+      req.subscribe(function(event){
+        expect(event.hasValue()).toBe(true);
+        expect(event.value().length).toBe(1);
+        expect(event.value()[0].cardType).toBe('MasterCard');
+        done();
+
+        return Bacon.noMore;
+      });
+    });
   });
 };
