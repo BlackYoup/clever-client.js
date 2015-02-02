@@ -87,32 +87,5 @@ module.exports = function(client) {
         return Bacon.noMore;
       });
     });
-
-    it("should be able to get organisation invoices", function(done){
-      var invoiceId = "orga_5a58bf40-3fd6-47b2-adec-41d43becef8d1418056791269";
-      var req = client.organisations._.payments.billings.get().withParams([orgaId]).send();
-
-      req.subscribe(function(event){
-        expect(event.hasValue()).toBe(true);
-        expect(_.size(event.value())).toBe(2);
-        expect(event.value()[invoiceId].status).toBe("PAID");
-        done();
-
-        return Bacon.noMore;
-      });
-    });
-
-    it("should be able to get a specific organisation invoice", function(done){
-      var invoiceId = "orga_5a58bf40-3fd6-47b2-adec-41d43becef8d1418054716851";
-      var req = client.organisations._.payments.billings._.get().withParams([orgaId, invoiceId]).send();
-
-      req.subscribe(function(event){
-        expect(event.hasValue()).toBe(true);
-        expect(event.value().status).toBe("PENDING");
-        done();
-
-        return Bacon.noMore;
-      });
-    });
   });
 };
