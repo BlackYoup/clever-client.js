@@ -124,16 +124,6 @@
                 </method>
             </resource>
             <resource path="authorize">
-                <method id="authorizeForm" name="GET">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="Cookie" style="header" type="xs:string" path="ccid"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="Cookie" style="header" type="xs:string" path="cctk"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="oauth_token" style="query" type="xs:string"/>
-                    </request>
-                    <response>
-                        <representation mediaType="text/html"/>
-                    </response>
-                </method>
                 <method id="authorizeToken" name="POST">
                     <request>
                         <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="Cookie" style="header" type="xs:string" path="ccid"/>
@@ -295,17 +285,6 @@
                     </response>
                 </method>
             </resource>
-            <resource path="billings/{bid}.pdf">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="bid" style="template" type="xs:string"/>
-                <method id="getPdfInvoice" name="GET">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="token" style="query" type="xs:string"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/pdf"/>
-                    </response>
-                </method>
-            </resource>
             <resource path="methods">
                 <method id="addUserMethod" name="POST">
                     <request>
@@ -317,77 +296,7 @@
                 </method>
             </resource>
         </resource>
-        <resource path="session">
-            <resource path="login">
-                <method id="login" name="POST">
-                    <request>
-                        <representation mediaType="application/x-www-form-urlencoded">
-                            <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="email" style="query" type="xs:string"/>
-                            <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="pass" style="query" type="xs:string"/>
-                            <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="from_authorize" style="query" type="xs:string"/>
-                        </representation>
-                    </request>
-                    <response>
-                        <representation mediaType="text/html"/>
-                    </response>
-                </method>
-                <method id="getLoginForm" name="GET">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="secondaryEmailKey" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="deletionKey" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="fromAuthorize" style="query" type="xs:string"/>
-                    </request>
-                    <response>
-                        <representation mediaType="text/html"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="signup">
-                <method id="getSignupForm" name="GET">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="invitationKey" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="url_next" style="query" type="xs:string"/>
-                    </request>
-                    <response>
-                        <representation mediaType="text/html"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
         <resource path="payments">
-            <resource path="tokens/bt">
-                <method id="getBraintreeToken" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="providers">
-                <method id="getAvailablePaymentProviders" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="webhooks/paymill">
-                <method id="handlePaymillWebHook" name="POST">
-                    <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="verif" style="query" type="xs:string"/>
-                        <representation mediaType="application/json"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="coupons/{name}">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="name" style="template" type="xs:string"/>
-                <method id="getCoupon" name="GET">
-                    <response>
-                        <representation mediaType="application/json"/>
-                    </response>
-                </method>
-            </resource>
             <resource path="{bid}/end/bt">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="bid" style="template" type="xs:string"/>
                 <method id="endPaymentWithBraintree" name="POST">
