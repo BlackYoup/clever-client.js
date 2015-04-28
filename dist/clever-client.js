@@ -151,6 +151,11 @@ var methods = {
     "name": "createCoupon",
     "params": []
   }],
+  "/internal/credentials": [{
+    "verb": "POST",
+    "name": "createCredentials",
+    "params": []
+  }],
   "/internal/dropcounts/{ownerId}": [{
     "verb": "POST",
     "name": "addDrops",
@@ -181,6 +186,14 @@ var methods = {
     "verb": "POST",
     "name": "createPendingInvoice",
     "params": []
+  }],
+  "/internal/invoices/fortransactions/{transId}": [{
+    "verb": "POST",
+    "name": "createInvoiceForTransaction",
+    "params": [{
+      "name": "transId",
+      "style": "template"
+    }]
   }],
   "/internal/invoices/links": [{
     "verb": "GET",
@@ -242,7 +255,7 @@ var methods = {
     "verb": "POST",
     "name": "uploadManifest",
     "params": [{
-      "name": "ownerId",
+      "name": "id",
       "style": "template"
     }]
   }],
@@ -483,6 +496,11 @@ var methods = {
       "style": "query"
     }]
   }],
+  "/oauth/rights": [{
+    "verb": "GET",
+    "name": "getAvailableRights",
+    "params": []
+  }],
   "/organisations": [{
     "verb": "GET",
     "name": "getUserOrganisationss",
@@ -522,39 +540,6 @@ var methods = {
     "name": "getProvidersInfo",
     "params": [{
       "name": "id",
-      "style": "template"
-    }]
-  }],
-  "/organisations/{id}/addonproviders/plans/{planId}/features/{featureName}": [{
-    "verb": "DELETE",
-    "name": "deleteProviderPlanFeature",
-    "params": [{
-      "name": "id",
-      "style": "template"
-    }, {
-      "name": "featureName",
-      "style": "template"
-    }, {
-      "name": "providerId",
-      "style": "template"
-    }, {
-      "name": "planId",
-      "style": "template"
-    }]
-  }, {
-    "verb": "PUT",
-    "name": "editProviderPlanFeature",
-    "params": [{
-      "name": "id",
-      "style": "template"
-    }, {
-      "name": "featureName",
-      "style": "template"
-    }, {
-      "name": "providerId",
-      "style": "template"
-    }, {
-      "name": "planId",
       "style": "template"
     }]
   }],
@@ -675,11 +660,14 @@ var methods = {
       "style": "template"
     }]
   }],
-  "/organisations/{id}/addonproviders/{providerId}/plans/{planId}/features": [{
-    "verb": "GET",
-    "name": "getProviderPlanFeatures",
+  "/organisations/{id}/addonproviders/{providerId}/plans/{planId}/features/{featureName}": [{
+    "verb": "DELETE",
+    "name": "deleteProviderPlanFeature",
     "params": [{
       "name": "id",
+      "style": "template"
+    }, {
+      "name": "featureName",
       "style": "template"
     }, {
       "name": "providerId",
@@ -690,9 +678,12 @@ var methods = {
     }]
   }, {
     "verb": "PUT",
-    "name": "editProviderPlanFeatures",
+    "name": "editProviderPlanFeature",
     "params": [{
       "name": "id",
+      "style": "template"
+    }, {
+      "name": "featureName",
       "style": "template"
     }, {
       "name": "providerId",
@@ -937,6 +928,9 @@ var methods = {
     }, {
       "name": "offset",
       "style": "query"
+    }, {
+      "name": "action",
+      "style": "query"
     }]
   }],
   "/organisations/{id}/applications/{appId}/deployments/{deploymentId}/instances": [{
@@ -1047,23 +1041,6 @@ var methods = {
     }, {
       "name": "appId",
       "style": "template"
-    }]
-  }],
-  "/organisations/{id}/applications/{appId}/logs": [{
-    "verb": "GET",
-    "name": "getApplicationLogss",
-    "params": [{
-      "name": "id",
-      "style": "template"
-    }, {
-      "name": "appId",
-      "style": "template"
-    }, {
-      "name": "order",
-      "style": "query"
-    }, {
-      "name": "since",
-      "style": "query"
     }]
   }],
   "/organisations/{id}/applications/{appId}/tags": [{
@@ -1185,6 +1162,32 @@ var methods = {
     "name": "setOrgaAvatarFromSource",
     "params": [{
       "name": "id",
+      "style": "template"
+    }]
+  }],
+  "/organisations/{id}/consumers": [{
+    "verb": "GET",
+    "name": "getConsumers",
+    "params": [{
+      "name": "id",
+      "style": "template"
+    }]
+  }, {
+    "verb": "POST",
+    "name": "createConsumer",
+    "params": [{
+      "name": "id",
+      "style": "template"
+    }]
+  }],
+  "/organisations/{id}/consumers/{key}/secret": [{
+    "verb": "GET",
+    "name": "getConsumerSecret",
+    "params": [{
+      "name": "id",
+      "style": "template"
+    }, {
+      "name": "key",
       "style": "template"
     }]
   }],
@@ -1663,7 +1666,7 @@ var methods = {
   }],
   "/self/applications/{appId}/deployments": [{
     "verb": "GET",
-    "name": "getApplication",
+    "name": "getApplicationDeployments",
     "params": [{
       "name": "appId",
       "style": "template"
@@ -1673,11 +1676,14 @@ var methods = {
     }, {
       "name": "offset",
       "style": "query"
+    }, {
+      "name": "action",
+      "style": "query"
     }]
   }],
   "/self/applications/{appId}/deployments/{deploymentId}/instances": [{
     "verb": "DELETE",
-    "name": "getApplicationDeploymentsForOrga",
+    "name": "cancelDeploy",
     "params": [{
       "name": "id",
       "style": "template"
@@ -1759,20 +1765,6 @@ var methods = {
     "params": [{
       "name": "appId",
       "style": "template"
-    }]
-  }],
-  "/self/applications/{appId}/logs": [{
-    "verb": "GET",
-    "name": "getApplicationLogs",
-    "params": [{
-      "name": "appId",
-      "style": "template"
-    }, {
-      "name": "orger",
-      "style": "query"
-    }, {
-      "name": "since",
-      "style": "query"
     }]
   }],
   "/self/applications/{appId}/tags": [{
@@ -2087,6 +2079,11 @@ var methods = {
       "name": "url_next",
       "style": "query"
     }]
+  }],
+  "/summary": [{
+    "verb": "GET",
+    "name": "getSummary",
+    "params": []
   }],
   "/users": [{
     "verb": "GET",
